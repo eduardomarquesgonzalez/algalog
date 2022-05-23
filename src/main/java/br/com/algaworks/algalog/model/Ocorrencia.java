@@ -1,42 +1,30 @@
 package br.com.algaworks.algalog.model;
 
+import java.time.OffsetDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.ManyToOne;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-
-public class Cliente {
+public class Ocorrencia {
 	
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@ManyToOne //muitas ocorrencias tem uma entrega
+	private Entrega entrega;
+	private String descricao;
+	private OffsetDateTime dataRegistro;
 	
-	@NotBlank
-	@Size(max = 60)
-	private String nome;
-	
-	@NotBlank
-	@Email
-	@Size(max = 255)
-	private String email;
-	
-	@NotBlank
-	@Size(max = 20)
-	private String telefone;
-
 }

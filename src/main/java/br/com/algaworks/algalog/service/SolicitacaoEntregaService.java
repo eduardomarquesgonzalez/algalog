@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.algaworks.algalog.model.Cliente;
 import br.com.algaworks.algalog.model.Entrega;
-import br.com.algaworks.algalog.model.enums.StatusEntra;
+import br.com.algaworks.algalog.model.enums.StatusEntrega;
 import br.com.algaworks.algalog.repository.EntregaRespository;
 import lombok.AllArgsConstructor;
 
@@ -22,7 +22,7 @@ public class SolicitacaoEntregaService {
 	public Entrega solicitar(Entrega entrega) {
 		Cliente cliente = catalagoClienteService.buscar(entrega.getCliente().getId());
 		entrega.setCliente(cliente);
-		entrega.setStatus(StatusEntra.PENDENTE);
+		entrega.setStatus(StatusEntrega.PENDENTE);
 		entrega.setDataPedido(OffsetDateTime.now());
 
 		return repository.save(entrega);
